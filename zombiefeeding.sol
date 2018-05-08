@@ -40,7 +40,7 @@ contract ZombieFeeding is ZombieFactory {
         _targetDna = _targetDna % dnaModulus;
         uint newDna = (myZombie.dna + _targetDna) / 2;
         if (keccak256(species) == keccak256("kitty")) {
-        newDna = newDna - newDna % 100 + 99;
+            newDna = newDna - newDna % 100 + 99;
         }
         _createZombie("NoName", newDna);
         _triggerCooldown(myZombie);
