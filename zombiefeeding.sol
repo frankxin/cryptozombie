@@ -2,6 +2,7 @@ pragma solidity ^0.4.19;
 
 import "./zombiefactory.sol";
 
+//定义interface
 contract KittyInterface {
     function getKitty(uint256 _id) external view returns (
         bool isGestating,
@@ -18,10 +19,12 @@ contract KittyInterface {
 }
 
 contract ZombieFeeding is ZombieFactory {
-
+    //声明参数
     KittyInterface kittyContract;
-
+    
+    //onlyOwner modifier 只有合约主人能修改
     function setKittyContractAddress(address _address) external onlyOwner {
+        //实例化kittyContract
         kittyContract = KittyInterface(_address);
     }
 
@@ -48,6 +51,7 @@ contract ZombieFeeding is ZombieFactory {
 
     function feedOnKitty(uint _zombieId, uint _kittyId) public {
         uint kittyDna;
+        //获取返回值中的变量
         (,,,,,,,,,kittyDna) = kittyContract.getKitty(_kittyId);
         feedAndMultiply(_zombieId, kittyDna, "kitty");
     }
